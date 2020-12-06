@@ -1,10 +1,10 @@
-const fs = require('fs');
+const fs = require("fs");
 
-fs.readFile('./input.txt', 'utf8', (err, data) => {
-  let lines = data.split('\n');
+fs.readFile("./input.txt", "utf8", (err, data) => {
+  let lines = data.split("\n");
   const arr = [];
   lines.forEach((line) => {
-    line && arr.push(Number(line));      
+    line && arr.push(Number(line));
   });
   console.log(findIt2(arr));
   console.log(findIt3(arr));

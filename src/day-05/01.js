@@ -1,11 +1,11 @@
-const fs = require('fs');
+const fs = require("fs");
 const findSeat = require("./findSeat");
-const findMissing = require('./findMissing');
-const data = fs.readFileSync('./input.txt');
+const findMissing = require("./findMissing");
+const data = fs.readFileSync("./input.txt");
 const dataString = data.toString();
 
 // get all seat IDs
-const seats = dataString.split('\n').map((line) => findSeat(line));
+const seats = dataString.split("\n").map((line) => findSeat(line));
 
 // find the highest ID (part 1)
 console.log(Math.max(...seats));

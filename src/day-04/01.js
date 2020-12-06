@@ -1,37 +1,37 @@
-const fs = require('fs');
-const data = fs.readFileSync('./input.txt');
+const fs = require("fs");
+const data = fs.readFileSync("./input.txt");
 const dataString = data.toString().trim();
 
 let validCount = 0;
 
-const passports = dataString.split('\n\n').map((passport, i) => {
+const passports = dataString.split("\n\n").map((passport, i) => {
   const trimmed = passport.replace(/\r?\n|\r/g, " ").trim();
-  const passportFields = trimmed.split(' ').reduce((acc, curr) => {
-    const [key, value] = curr.split(':');
+  const passportFields = trimmed.split(" ").reduce((acc, curr) => {
+    const [key, value] = curr.split(":");
     return {
       ...acc,
       [key]: value,
-    }
-  }, {})
+    };
+  }, {});
   isValid(passportFields) && validCount++;
-})
+});
 
 function isValid(fields) {
   const keys = Object.keys(fields);
-  if (keys.length < 7 && !fields['cid']) {
+  if (keys.length < 7 && !fields["cid"]) {
     return false;
   }
-  if (keys.length < 8 && fields['cid']) {
+  if (keys.length < 8 && fields["cid"]) {
     return false;
   }
 
-  if (!isValidBirthYear(fields['byr'])) return false;
-  if (!isValidIssueYear(fields['iyr'])) return false;
-  if (!isValidExpirationYear(fields['eyr'])) return false;
-  if (!isValidHeight(fields['hgt'])) return false;
-  if (!isValidHairColor(fields['hcl'])) return false;
-  if (!isValidEyeColor(fields['ecl'])) return false;
-  if (!isValidPassportID(fields['pid'])) return false;
+  if (!isValidBirthYear(fields["byr"])) return false;
+  if (!isValidIssueYear(fields["iyr"])) return false;
+  if (!isValidExpirationYear(fields["eyr"])) return false;
+  if (!isValidHeight(fields["hgt"])) return false;
+  if (!isValidHairColor(fields["hcl"])) return false;
+  if (!isValidEyeColor(fields["ecl"])) return false;
+  if (!isValidPassportID(fields["pid"])) return false;
 
   return true;
 }
@@ -64,12 +64,12 @@ function isValidExpirationYear(data) {
 }
 
 function isValidHeight(data) {
-  if (data.includes('in')) {
-    const val = Number(data.replace('in', ''));
+  if (data.includes("in")) {
+    const val = Number(data.replace("in", ""));
     return val >= 59 && val <= 76;
   }
-  if (data.includes('cm')) {
-    const val = Number(data.replace('cm', ''));
+  if (data.includes("cm")) {
+    const val = Number(data.replace("cm", ""));
     return val >= 150 && val <= 193;
   }
   return false;
